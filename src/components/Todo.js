@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Todo = ({ text, todo, todos, setTodos }) => {
-    //Events
+    //Remove an item from list if deleted from state
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     };
+    //Show mark-through (completed CSS) if an item is marked as completed
     const completeHandler = () => {
         setTodos(
             todos.map((item) => {
@@ -17,6 +18,7 @@ const Todo = ({ text, todo, todos, setTodos }) => {
                 return item;
         }));
     };
+    //Renders a single todo
     return(
         <div className="todo">
             <li className={`todo-item ${todo.completed ? "completed" : ""}`}> {text} </li>

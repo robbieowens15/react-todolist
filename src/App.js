@@ -5,10 +5,12 @@ import Form from './components/Forms'
 import TodoList from './components/TodoList'
 
 function App() {
+  //Create State
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
+  //RUN ONCE: This will load state from memory if it exists
   useEffect(() => {
     if(localStorage.getItem("todos") === null){
       localStorage.setItem("todos", JSON.stringify([]));
@@ -17,7 +19,9 @@ function App() {
       setTodos(JSON.parse(localStorage.getItem((("todos")))));
     }
   }, []);
+  //This block should execute upon any change to any todo state or change in status state
   useEffect(() => {
+    //Changes which todos are displayed based on what dropdown option is selected
     switch(status){
       case "completed":
         setFilteredTodos(todos.filter((todo) => todo.completed === true));
@@ -29,8 +33,10 @@ function App() {
         setFilteredTodos(todos);
         break;  
     }
+    //Saves all todos to local memory
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos, status]);
+  //The Following renders the web-app
   return (
     <div className="App">
       <header>
