@@ -1,6 +1,6 @@
 import React from "react"
 
-const Form = ({ inputText, setInputText, todos, setTodos, setStatus })  => {
+const Form = ({ inputText, setInputText, todos, setTodos, setStatus, status })  => {
     //Updates the input-field state (thus display) upon keystrokes 
     const inputTextHandler = (e) => {
       setInputText(e.target.value);
@@ -31,9 +31,9 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus })  => {
       </button>
       <div className="select">
         <select onChange= {statusHandler} name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
+          <option defaultValue={`${status==="completed" ? "" : ""}`} value="completed">Completed</option>
+          <option defaultValue={`${status==="all" ? "" : ""}`} value="all">All</option>
+          <option defaultValue={`${status==="uncompleted" ? "" : ""}`} value="uncompleted">Uncompleted</option>
         </select>
       </div>
     </form>

@@ -12,11 +12,19 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState([]);
   //RUN ONCE: This will load state from memory if it exists
   useEffect(() => {
+    //Load todos if they exist in local memory
     if(localStorage.getItem("todos") === null){
       localStorage.setItem("todos", JSON.stringify([]));
     }
     else{
       setTodos(JSON.parse(localStorage.getItem((("todos")))));
+    }
+    //Load status if it exists in local memory
+    if(localStorage.getItem("status") === null){
+      localStorage.setItem("status", JSON.stringify("all"));
+    }
+    else{
+      setStatus(JSON.parse(localStorage.getItem("status")));
     }
   }, []);
   //This block should execute upon any change to any todo state or change in status state
@@ -35,6 +43,8 @@ function App() {
     }
     //Saves all todos to local memory
     localStorage.setItem("todos", JSON.stringify(todos));
+    //Saves status to local memory
+    localStorage.setItem("status", JSON.stringify(status));
   }, [todos, status]);
   //The Following renders the web-app
   return (
@@ -48,6 +58,7 @@ function App() {
         inputText={inputText} 
         setInputText={setInputText}
         setStatus={setStatus}
+        status={status}
       />
       <TodoList
         filteredTodos={filteredTodos}
